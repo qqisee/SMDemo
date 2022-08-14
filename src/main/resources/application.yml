@@ -6,6 +6,9 @@ logging:
 spring:
   jackson:
     default-property-inclusion: non_null
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
 springdoc:
   swagger-ui:
     path: /api.html
+    enabled: false
