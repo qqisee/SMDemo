@@ -1,0 +1,11 @@
+server:
+  port: 1258
+logging:
+  level:
+    com.netsec.sm: debug
+spring:
+  jackson:
+    default-property-inclusion: non_null
+springdoc:
+  swagger-ui:
+    path: /api.html
