@@ -13,7 +13,6 @@ import org.bouncycastle.crypto.params.ECPublicKeyParameters;
 import org.bouncycastle.crypto.params.ParametersWithRandom;
 import org.bouncycastle.math.ec.ECPoint;
 import org.bouncycastle.util.encoders.Hex;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.*;
@@ -23,11 +22,9 @@ import java.util.Arrays;
 @Slf4j
 public class Sm2ServiceImpl implements Sm2Service {
 
-    @Autowired
-    private CipherText cipherText;
 
-    @Autowired
-    private Sm2Result sm2Result;
+
+
 
     @Override
     public Sm2Result sm2Encrypt(String publicKey, String data) {
@@ -52,6 +49,7 @@ public class Sm2ServiceImpl implements Sm2Service {
             System.out.println("SM2加密时出现异常:"+e.getMessage());
             throw new RuntimeException(e);
         }
+        Sm2Result sm2Result = new Sm2Result();
         sm2Result.setResult(Hex.toHexString(arrayOfBytes));
         return sm2Result;
     }
@@ -69,6 +67,7 @@ public class Sm2ServiceImpl implements Sm2Service {
     @SneakyThrows
     @Override
     public CipherText changeC1C3C2ToAsn1(byte[] c1c3c2){
+        CipherText cipherText = new CipherText();
         final int C1_LEN = 65;
         final int C3_LEN = 32;
         byte[] c1 = Arrays.copyOfRange(c1c3c2, 0, C1_LEN);
