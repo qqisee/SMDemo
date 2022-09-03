@@ -34,7 +34,7 @@ public class SM2Controller {
                     @RequestParam(value = "asn1", required = false, defaultValue = "false")
                     @Parameter(description = "是否参数")
                     String asn1) {
-        System.out.println("asn1:" + asn1);
+//        System.out.println("asn1:" + asn1);
         log.debug(sm2Encrypt.toString());
         Sm2Result encrypt = sm2Service.sm2Encrypt(sm2Encrypt.getPublicKey(), sm2Encrypt.getData());
         if ("true".equalsIgnoreCase(asn1)) {

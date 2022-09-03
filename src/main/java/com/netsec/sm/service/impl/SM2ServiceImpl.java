@@ -47,7 +47,7 @@ public class SM2ServiceImpl implements SM2Service {
             byte[] in = data.getBytes();
             arrayOfBytes = sm2Engine.processBlock(in, 0, in.length);
         } catch (Exception e) {
-            System.out.println("SM2加密时出现异常:"+e.getMessage());
+//            System.out.println("SM2加密时出现异常:"+e.getMessage());
             throw new RuntimeException(e);
         }
         Sm2Result sm2Result = new Sm2Result();
@@ -100,7 +100,7 @@ public class SM2ServiceImpl implements SM2Service {
         v.add(derEnc);
         DERSequence seq = new DERSequence(v);
         String ans1HexString = Hex.toHexString(seq.getEncoded(ASN1Encoding.DER));
-        System.out.println("asn1："+ans1HexString);
+//        System.out.println("asn1："+ans1HexString);
         cipherText.setAns1HexString(ans1HexString);
         return cipherText;
     }
