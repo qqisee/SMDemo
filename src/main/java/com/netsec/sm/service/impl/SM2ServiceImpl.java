@@ -5,6 +5,7 @@ import com.netsec.sm.domain.Sm2Result;
 import com.netsec.sm.service.SM2Service;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.bouncycastle.asn1.*;
 import org.bouncycastle.asn1.gm.GMNamedCurves;
 import org.bouncycastle.asn1.x9.X9ECParameters;
 import org.bouncycastle.crypto.engines.SM2Engine;
@@ -13,17 +14,17 @@ import org.bouncycastle.crypto.params.ECPublicKeyParameters;
 import org.bouncycastle.crypto.params.ParametersWithRandom;
 import org.bouncycastle.math.ec.ECPoint;
 import org.bouncycastle.util.encoders.Hex;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.security.*;
 import java.util.Arrays;
+
 
 @Service
 @Slf4j
 public class SM2ServiceImpl implements SM2Service {
-
-
-
 
 
     @Override
@@ -85,7 +86,6 @@ public class SM2ServiceImpl implements SM2Service {
         cipherText.setHash(Hex.toHexString(c3));
         cipherText.setCipher(Hex.toHexString(c2));
 
-        /*
         BigInteger r = new BigInteger(1, c1X);
         BigInteger s = new BigInteger(1, c1Y);
 
@@ -101,9 +101,7 @@ public class SM2ServiceImpl implements SM2Service {
         DERSequence seq = new DERSequence(v);
         String ans1HexString = Hex.toHexString(seq.getEncoded(ASN1Encoding.DER));
         System.out.println("asn1："+ans1HexString);
-
-         */
-//        return ans1HexString;
+        cipherText.setAns1HexString(ans1HexString);
         return cipherText;
     }
 }

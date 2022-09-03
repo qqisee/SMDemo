@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-public class Sm2Result{
+public class Sm2Result {
     /*
     c1c3c2格式结果
      */
@@ -13,5 +13,7 @@ public class Sm2Result{
 
 
     private CipherText cipherText;
+
+
 
 }

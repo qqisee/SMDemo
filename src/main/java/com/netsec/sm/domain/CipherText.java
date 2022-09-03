@@ -13,4 +13,6 @@ public class CipherText {
     private String y;
     private String hash;
     private String cipher;
+
+    private String ans1HexString;
 }
