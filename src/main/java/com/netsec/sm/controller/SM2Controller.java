@@ -4,10 +4,9 @@ import com.netsec.sm.config.R;
 import com.netsec.sm.domain.CipherText;
 import com.netsec.sm.domain.Sm2Encrypt;
 import com.netsec.sm.domain.Sm2Result;
-import com.netsec.sm.service.impl.Sm2ServiceImpl;
+import com.netsec.sm.service.impl.SM2ServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.encoders.Hex;
@@ -20,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Tag(name = "SM2加密")
 @RestController
-public class Sm2Controller {
+public class SM2Controller {
 
     @Autowired
-    private Sm2ServiceImpl sm2Service;
+    private SM2ServiceImpl sm2Service;
 
 
     @Operation(summary = "SM2加密，asn1为true同时返回asn1格式的加密结果")

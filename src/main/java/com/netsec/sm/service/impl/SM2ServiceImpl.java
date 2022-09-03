@@ -2,7 +2,7 @@ package com.netsec.sm.service.impl;
 
 import com.netsec.sm.domain.CipherText;
 import com.netsec.sm.domain.Sm2Result;
-import com.netsec.sm.service.Sm2Service;
+import com.netsec.sm.service.SM2Service;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.asn1.gm.GMNamedCurves;
@@ -20,7 +20,7 @@ import java.util.Arrays;
 
 @Service
 @Slf4j
-public class Sm2ServiceImpl implements Sm2Service {
+public class SM2ServiceImpl implements SM2Service {
 
 
 

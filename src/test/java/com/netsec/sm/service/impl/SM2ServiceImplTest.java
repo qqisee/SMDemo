@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class Sm2ServiceImplTest {
+class SM2ServiceImplTest {
 
     @Test
     void sm2Encrypt() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException {
@@ -34,7 +32,7 @@ class Sm2ServiceImplTest {
         BCECPrivateKey s=(BCECPrivateKey)privateKey;
         System.out.println("\n私钥："+Hex.toHexString(s.getD().toByteArray()));
 
-        Sm2ServiceImpl sm2Service = new Sm2ServiceImpl();
+        SM2ServiceImpl sm2Service = new SM2ServiceImpl();
         Sm2Result sm2Encrypt = sm2Service.sm2Encrypt(newPublicKey, M);
         System.out.println("加密结果"+sm2Encrypt);
 //        byte[] decode = Hex.decode(sm2Encrypt.);
