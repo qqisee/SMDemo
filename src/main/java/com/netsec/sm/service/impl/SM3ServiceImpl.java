@@ -20,8 +20,8 @@ public class SM3ServiceImpl implements SM3Service {
         byte[] hash = new byte[digest.getDigestSize()];
         //close the digest, producing the final digest value.
         digest.doFinal(hash, 0);
-        System.out.println(Arrays.toString(hash));
-        System.out.println(hash.length);
+//        System.out.println(Arrays.toString(hash));
+//        System.out.println(hash.length);
         return new SM3Result(ByteUtils.toHexString(hash));
     }
 }

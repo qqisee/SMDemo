@@ -5,9 +5,9 @@ server:
       max: 2000
     max-connections: 10000
 
-#logging:
-#  level:
-#    com.netsec.sm: debug
+logging:
+  level:
+    com.netsec.sm: debug
 spring:
   jackson:
     default-property-inclusion: non_null
@@ -17,6 +17,3 @@ springdoc:
   swagger-ui:
     path: /api.html
     enabled: true
-logging:
-  level:
-    com.netsec.sm: off
