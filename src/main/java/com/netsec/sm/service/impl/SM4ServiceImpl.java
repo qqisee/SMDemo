@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 public class SM4ServiceImpl implements SM4Service {
     public static final int BLOCK_SIZE = 16;
     @Override
-    public byte[] sm4Encrypt(byte[] in) {
-        var keyBytes = "1111222233334444".getBytes();
+    public byte[] sm4Encrypt(byte[] in,String key) {
+        var keyBytes = key.getBytes();
         SM4Engine sm4Engine = new SM4Engine();
         sm4Engine.init(false, new KeyParameter(keyBytes));
         int inLen = in.length;

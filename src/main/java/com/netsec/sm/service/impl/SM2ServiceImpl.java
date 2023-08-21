@@ -10,10 +10,12 @@ import org.bouncycastle.asn1.gm.GMNamedCurves;
 import org.bouncycastle.asn1.x9.X9ECParameters;
 import org.bouncycastle.crypto.engines.SM2Engine;
 import org.bouncycastle.crypto.params.ECDomainParameters;
+import org.bouncycastle.crypto.params.ECPrivateKeyParameters;
 import org.bouncycastle.crypto.params.ECPublicKeyParameters;
 import org.bouncycastle.crypto.params.ParametersWithRandom;
 import org.bouncycastle.math.ec.ECPoint;
 import org.bouncycastle.util.encoders.Hex;
+import org.bouncycastle.util.encoders.HexEncoder;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -55,9 +57,35 @@ public class SM2ServiceImpl implements SM2Service {
         return sm2Result;
     }
 
+
     @Override
-    public String sm2Decrypt() {
-        return null;
+    public String sm2Decrypt(String privateKey,String cipherData) {
+        // 使用BC库加解密时密文以04开头，传入的密文前面没有04则补上
+        if (!cipherData.startsWith("04")){
+            cipherData = "04" + cipherData;
+        }
+        byte[] cipherDataByte = Hex.decode(cipherData);
+
+        //获取一条SM2曲线参数
+        X9ECParameters sm2ECParameters = GMNamedCurves.getByName("sm2p256v1");
+        //构造domain参数
+        ECDomainParameters domainParameters = new ECDomainParameters(sm2ECParameters.getCurve(), sm2ECParameters.getG(), sm2ECParameters.getN());
+
+        BigInteger privateKeyD = new BigInteger(privateKey, 16);
+        ECPrivateKeyParameters privateKeyParameters = new ECPrivateKeyParameters(privateKeyD, domainParameters);
+
+        SM2Engine sm2Engine = new SM2Engine(SM2Engine.Mode.C1C3C2);
+        // 设置sm2为解密模式
+        sm2Engine.init(false, privateKeyParameters);
+
+        String result = "";
+        try {
+            byte[] arrayOfBytes = sm2Engine.processBlock(cipherDataByte, 0, cipherDataByte.length);
+            return new String(arrayOfBytes);
+        } catch (Exception e) {
+            System.out.println("SM2解密时出现异常:"+e.getMessage());
+        }
+        return result;
     }
 
     @Override

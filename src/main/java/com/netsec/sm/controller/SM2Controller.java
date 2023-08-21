@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@Tag(name = "SM2加密")
+@Tag(name = "SM2加解密")
 @RestController
 public class SM2Controller {
 
@@ -27,7 +27,7 @@ public class SM2Controller {
 
 
     @Operation(summary = "SM2加密，asn1为true同时返回asn1格式的加密结果")
-    @PostMapping("/sm2")
+    @PostMapping("/sm2encrypt")
     public R<?> sm2(@RequestBody
                     @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "请求体")
                     Sm2Encrypt sm2Encrypt,
@@ -41,7 +41,25 @@ public class SM2Controller {
             CipherText toAsn1 = sm2Service.changeC1C3C2ToAsn1(Hex.decode(encrypt.getResult()));
             encrypt.setCipherText(toAsn1);
         }
-        return R.success(encrypt);
+        return R.success(encrypt).setMsg("加密结果含04前缀");
+    }
+
+    @Operation(summary = "SM2解密，asn1为true同时返回asn1格式的解密结果")
+    @PostMapping("/sm2decrypt")
+    public R<?> sm2Decrypt(@RequestBody
+                    @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "请求体")
+                    Sm2Encrypt sm2Encrypt,
+                    @RequestParam(value = "asn1", required = false, defaultValue = "false")
+                    @Parameter(description = "是否参数")
+                    String asn1) {
+//        System.out.println("asn1:" + asn1);
+        log.debug(sm2Encrypt.toString());
+        String sm2Decrypt = sm2Service.sm2Decrypt(sm2Encrypt.getPrivateKey(),sm2Encrypt.getData());
+//        if ("true".equalsIgnoreCase(asn1)) {
+//            CipherText toAsn1 = sm2Service.changeC1C3C2ToAsn1(Hex.decode(sm2Decrypt.getResult()));
+//            sm2Decrypt.setCipherText(toAsn1);
+//        }
+        return R.success(sm2Decrypt);
     }
 
     @PostMapping("/c1c3c2toasn1")

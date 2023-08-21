@@ -19,7 +19,7 @@ class SM4ServiceImplTest {
     @Test
     void sm4Encrypt() {
         byte[] bytes = "1234567890123456".getBytes();
-        byte[] sm4Encrypt = sm4Service.sm4Encrypt(bytes);
+        byte[] sm4Encrypt = sm4Service.sm4Encrypt(bytes,"11111111".getBytes());
         System.out.println(ByteUtils.toHexString(sm4Encrypt));
     }
 

@@ -12,8 +12,14 @@ public class Sm2Result {
     private String result;
 
 
+    /**
+     * 密文
+     */
     private CipherText cipherText;
 
-
+    /**
+     * 明文
+     */
+    private String plainText;
 
 }
