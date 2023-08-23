@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class SM4ServiceImplTest {
@@ -22,14 +21,12 @@ class SM4ServiceImplTest {
     @Test
     void sm4Encrypt() throws Exception {
         byte[] bytes = "1234567890123456".getBytes();
-        byte[] sm4Encrypt = sm4Service.sm4Encrypt(bytes,"8888888888888888");
-        System.out.println(ByteUtils.toHexString(sm4Encrypt));
-        byte[] sm4Encrypt1 = sm4Service.sm4Encrypt(plainText, "SM4/CBC/NOPADDING", new byte[]{86, 69, 47, -115, -63, 54, 35, 24, -2, 114, 113, 102, 82, 20, 69, 59});
+//        byte[] sm4Encrypt = sm4Service.sm4Encrypt(bytes,"8888888888888888");
+//        System.out.println(ByteUtils.toHexString(sm4Encrypt));
+        byte[] sm4Encrypt1 = sm4Service.sm4Encrypt(plainText, "SM4/CBC/NOPADDING","8888888888888888","8888888888888888");
         System.out.println(Arrays.toString(sm4Encrypt1));
-
-        byte[] sm4Decrypt = sm4Service.sm4Decrypt(new byte[]{86, 69, 47, -115, -63, 54, 35, 24, -2, 114, 113, 102, 82, 20, 69, 59}, "SM4/CBC/NOPADDING", plainText.getBytes());
+        byte[] sm4Decrypt = sm4Service.sm4Decrypt(new byte[]{-120, 68, 121, 63, 118, -98, -35, 60, 11, 27, -10, 81, -94, 96, 70, 56}, "SM4/CBC/NOPADDING","8888888888888888","8888888888888888");
         System.out.println(new String(sm4Decrypt));
-
     }
 
     @Test
@@ -37,5 +34,15 @@ class SM4ServiceImplTest {
         SM4 sm4 = new SM4(Mode.ECB, Padding.PKCS5Padding);
         byte[] nihaos = sm4.encrypt("nihao");
         System.out.println(ByteUtils.toHexString(nihaos));
+    }
+
+    @Test
+    void sm4Test() {
+        try {
+            byte[] bytes = sm4Service.sm4Encrypt("helloworldhellow", "SM4/CBC/NOPADDING", "8888888888888888", "8888888888888888");
+            System.out.println(Arrays.toString(bytes));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 }
