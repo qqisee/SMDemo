@@ -18,4 +18,7 @@ public class Sm4Data {
 
     @Schema(example = "1111222233334444")
     private String key;
+
+
+//    private byte[] ciphertext;
 }

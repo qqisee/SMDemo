@@ -8,5 +8,5 @@ public interface SM4Service {
     byte[] sm4Encrypt(String plainText, String algo,String key,String ivString) throws Exception;
 
 
-    byte[] sm4Decrypt(byte[] plainText, String algo,String key,String ivString) throws Exception;
+    byte[] sm4Decrypt(byte[] cipherText, String algo,String key,String ivString) throws Exception;
 }

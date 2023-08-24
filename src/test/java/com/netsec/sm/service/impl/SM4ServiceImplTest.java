@@ -37,12 +37,15 @@ class SM4ServiceImplTest {
     }
 
     @Test
-    void sm4Test() {
+    void sm4Test() throws Exception{
         try {
             byte[] bytes = sm4Service.sm4Encrypt("helloworldhellow", "SM4/CBC/NOPADDING", "8888888888888888", "8888888888888888");
             System.out.println(Arrays.toString(bytes));
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+
+        byte[] bytes = sm4Service.sm4Decrypt(new byte[]{-120, 68, 121, 63, 118, -98, -35, 60, 11, 27, -10, 81, -94, 96, 70, 56}, "SM4/CBC/NOPADDING", "8888888888888888", "8888888888888888");
+        System.out.println(new String(bytes));
     }
 }
