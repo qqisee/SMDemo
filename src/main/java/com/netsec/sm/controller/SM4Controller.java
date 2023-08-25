@@ -11,11 +11,13 @@ import org.bouncycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/sm4")
+@RestController
 @Slf4j
 @Tag(name = "SM4加解密")
+@RequestMapping("/symmetric")
 public class SM4Controller {
 
     @Autowired
