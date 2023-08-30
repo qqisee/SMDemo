@@ -17,6 +17,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.zip.CRC32;
 
 
 @Slf4j
@@ -33,7 +34,7 @@ public class EncoderController {
     }
 
     @PostMapping("/hmac")
-    public R<?> hmacEncode(@RequestParam String text,String key,@RequestParam @Parameter(description = "Hmac算法") String algo) {
+    public R<?> hmacEncode(@RequestParam String text, String key, @RequestParam @Parameter(description = "Hmac算法") String algo) {
         try {
             // 生成密钥
             SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), algo);
@@ -49,6 +50,18 @@ public class EncoderController {
         } catch (Exception e) {
             return R.fail(e.toString());
         }
+    }
+
+    @PostMapping("/crc32")
+    public R<?> rc4Encode(@RequestParam String text) {
+        byte[] dataBytes = text.getBytes();
+
+        CRC32 crc32 = new CRC32();
+        crc32.update(dataBytes);
+
+        long crcValue = crc32.getValue();
+//        System.out.println("CRC32 Value: " + crcValue);
+        return R.success(crcValue);
     }
 }
 
